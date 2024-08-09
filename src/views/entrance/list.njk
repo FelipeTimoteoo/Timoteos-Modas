@@ -1,0 +1,94 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+    <title>Entradas</title>
+    <link rel="stylesheet" href="entrance.css"/>
+    <style>
+        @media print {
+            body {
+                width: 210mm;
+                height: 297mm;
+                margin: 10mm;
+                font-size: 12pt; /* Ajuste conforme necessário para legibilidade */
+                color: #000; /* Melhor para impressão em preto e branco */
+            }
+            .content {
+                width: 100%;
+                max-width: 190mm; /* Largura da área de impressão ajustada */
+            }
+            .table {
+                width: 100%;
+                table-layout: fixed; /* Melhora a consistência do layout da tabela */
+            }
+            .table th, .table td {
+                padding: 8px; /* Ajuste para melhor alinhamento vertical */
+                border: 1px solid #ccc; /* Melhora a visibilidade das células */
+            }
+            .btn, .form-control {
+                display: none; /* Oculta todos os botões e campos de formulário para impressão */
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Entradas</h4>
+            </div>
+            <div class="col-md-6 box-balance">
+                <strong class="sales">Vendas: {{ entrances.length }} </strong>
+                <strong class="balance">Total: {{ total }}</strong>
+            </div>
+        </div>
+
+        <form class="search" action="/entrancesdate" method="post">
+            <div class="row">            
+                <div class="col-md-4">
+                    <label for="startDate" class="form-label">Data Inicial</label>
+                    <input id="startDate" value="{{startDate}}" class="form-control" type="date" name="startDate" />
+                </div>
+                <div class="col-md-4">
+                    <label for="finalDate" class="form-label">Data Final</label>
+                    <input id="finalDate" value="{{finalDate}}" class="form-control" type="date" name="finalDate" />
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-primary" type="submit">Pesquisar</button>
+                    {% if dateFilter != false %}
+                        <a href="/entrances" class="btn btn-secondary">Limpar</a>
+                    {% endif %}
+                    {% if entrances.length > 0 %}
+                        <button class="btn btn-info btn-print" onclick="printReport()">Imprimir Relatório</button>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+        
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Tipo de Entrada</th>
+                    <th>Valor</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entrance in entrances %}
+                    {% if entrance != null %}
+                        <tr>
+                            <td>Venda</td>
+                            <td>{{ entrance.formattedValue }}</td>
+                            <td>{{ entrance.formattedDate }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>    
+    <script>
+        function printReport() {
+            window.print();
+        }
+    </script>
+{% endblock %}

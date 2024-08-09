@@ -1,0 +1,105 @@
+* {
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
+.content {
+    margin-top: 60px;
+}
+
+form.search {
+    margin-bottom: 20px
+}
+
+strong {
+    font-size: 15px;
+}
+
+
+.box-sale {
+    border-radius: 10px;
+    background: #EAEEF1;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    margin-top: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+div.data-product {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background: #fff;
+    padding: 15px;
+    margin-top: 15px
+}
+
+button.btn-primary {
+    background: #000000; /* Cor de fundo preta */
+    color: rgb(255, 255, 255); /* Cor do texto branco */
+    width: 100px; /* Largura do botão */
+    border: none; /* Remove bordas padrão do botão */
+    padding: 10px; /* Espaçamento interno opcional */
+    border-radius: 5px; /* Bordas arredondadas opcionais */
+    cursor: pointer; /* Cursor de ponteiro ao passar sobre o botão */
+    transition: background 0.3s ease; /* Transição suave para a cor de fundo */
+    margin-top: 25px; /* Margem superior para mover o botão para baixo */
+}
+
+/* Estilo do botão ao passar o mouse sobre ele */
+button.btn-primary:hover {
+    background: #555555; /* Nova cor de fundo ao passar o mouse */
+}
+
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.total strong {
+    background: #3BB5B4;
+    color: #174746;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+strong.balance {
+    padding: 10px;
+    background: #3BB5B4;
+    color: #174746;
+    border-radius: 10px;
+  
+}
+
+strong.sales {
+    border-radius: 10px;
+    padding: 10px;
+    background: #FFC447;
+    color: #634C1C;
+    margin-right: 10px;
+}
+
+a {
+    margin-top: 20px;
+}
+
+div.box-balance {
+    margin-bottom: 30px;
+    margin-top: 15px;
+}
+
+button.button-delete {
+    margin-top: 10px;
+}
+
+.box-descount {
+    margin-top: 5px;
+}

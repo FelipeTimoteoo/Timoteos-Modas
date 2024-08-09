@@ -1,0 +1,98 @@
+* {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+.content {
+  margin-top: 60px;
+}
+
+form input.form-control {
+  width: 250px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+form.form-product {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+form.search {
+  margin-bottom: 20px;
+}
+
+p.message-error {
+  color: #fd6259;
+}
+
+button.bnt-product {
+  background: #000000;
+  width: 120px;
+  
+}
+
+/* Estilo padrão do botão */
+button.btn-primaryy {
+  background: #000000; /* Cor de fundo preta */
+  color: rgb(255, 255, 255); /* Texto branco */
+  width: 100px; /* Largura do botão */
+  border: none; /* Remove bordas padrão do botão */
+  padding: 10px; /* Espaçamento interno opcional */
+  border-radius: 5px; /* Bordas arredondadas opcionais */
+  cursor: pointer; /* Cursor de ponteiro ao passar sobre o botão */
+  transition: background 0.3s ease; /* Transição suave para a cor de fundo */
+  button.btn-primaryy:hover {
+    background: #f8f8f8; /* Nova cor de fundo ao passar o mouse */
+  }
+}
+
+/* Estilo do botão ao passar o mouse sobre ele */
+button.btn-primaryy:hover {
+  background: #3d8ef7; /* Nova cor de fundo ao passar o mouse */
+}
+
+
+
+form.search {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.btn-secondary {
+  margin-left: 10px;
+}
+
+div.action {
+  display: flex;
+  font-size: 20px;
+}
+
+.bi-pencil-fill {
+  color: #ffc447;
+}
+
+.bi-pencil-fill:hover {
+  color: #d2a138;
+}
+
+div.action button.delete {
+  margin-left: 10px;
+  background: none;
+  color: #fd6259;
+}
+
+div.action button.delete:hover {
+  color: #da4a43;
+}
+
+div.action button.detail {
+  margin-left: 10px;
+  background: none;
+  color: #208eeb;
+}
+
+div.action button.detail:hover {
+  color: #106fbc;
+}

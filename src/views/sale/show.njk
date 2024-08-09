@@ -1,0 +1,70 @@
+
+
+{% block head %}
+    <title>Vendas</title>
+    <link rel="stylesheet" href="/saleshow.css"/>
+{% endblock %}
+
+<script>
+    window.print();
+</script>
+
+{% block content %}
+    <div class="content">
+        <strong>TIMOTEOS MODAS</strong>
+
+        <div class="row box-sale-row">
+            <p>R. Pref. Pio Alberti, 661</p>
+            <p>Osasco, Colombo (PR), (41) 99792-0013</p>
+            <p>CNPJ:  55.672.285/0001-07</p>
+            <p>Cliente: Cliente Balcão</p>
+            <p style="margin-bottom: -20px">{{formattedDate}}</p>
+            <table>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Qtd</th>
+                    <th>Valor</th>
+                </tr>
+
+                  {% if sale != null %}
+                        {% for product in sale.sale.products %}
+                            <tr>
+                                <td>
+                                    {{product.product.name}}
+                                </td>
+                                   
+                                <td>{{product.quantity}}</td>
+                                <td>{{product.formattedPrice}}</td>
+
+                      
+                            </tr>
+                                 {% if product.product.name == "PRODUTOS VARIADOS"%}
+                                    {% if sale.sale.productsVariedValues%}
+                                        {% for productsVaried in sale.sale.productsVariedValues %}
+                                            {% if productsVaried.value > 0 %}
+                                                <td class="productsVaried">{{productsVaried.formattedValue}}</td>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                 {% endif %}
+                        {% endfor %}
+                        <br/>
+                   
+                {% endif %}
+            </table>
+                <p>___________________________________________</p>
+                <strong>Total: {{total}}</strong>
+                <p>Venda de balcão</p>
+                <p>Vendedor: {{sale.seller.name}} </p>
+
+                <p style=" font-weight: bold">Confira seu troco</p>
+                <br/>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}        
+
+        
+
+

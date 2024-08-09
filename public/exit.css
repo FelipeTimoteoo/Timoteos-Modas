@@ -1,0 +1,90 @@
+.content {
+    margin-top: 60px;
+}
+
+form input.form-control  {
+    width: 250px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+p.message-error {
+    color: #FD6259;
+}
+
+button.bnt-exit {
+    width: 120px;
+    height: 40px;
+}
+
+form.cad {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+button.btn-primary {
+    background: #000000; /* Cor de fundo preta */
+    color: rgb(255, 255, 255); /* Cor do texto branco */
+    width: 100px; /* Largura do botão */
+    border: none; /* Remove bordas padrão do botão */
+    padding: 10px; /* Espaçamento interno opcional */
+    border-radius: 5px; /* Bordas arredondadas opcionais */
+    cursor: pointer; /* Cursor de ponteiro ao passar sobre o botão */
+    transition: background 0.3s ease; /* Transição suave para a cor de fundo */
+    margin-top: 5px; /* Margem superior para mover o botão para baixo */
+}
+
+/* Estilo do botão ao passar o mouse sobre ele */
+button.btn-primary:hover {
+    background: #555555; /* Nova cor de fundo ao passar o mouse */
+}
+form.search {
+    margin-bottom: 20px;
+}
+
+div.action {
+    display: flex;
+    font-size: 20px;
+}
+
+.bi-pencil-fill {
+    color: #FFC447;
+}
+
+.bi-pencil-fill:hover {
+    color: #d2a138;
+}
+
+div.action button.delete {
+    margin-left: 10px;
+    background: none;
+    color: #FD6259
+}
+
+div.action button.delete:hover {
+    color: #da4a43
+}
+
+form.search .row {
+    align-items: center;
+}
+
+strong.balance {
+    padding: 10px;
+    background: #c03f3f;
+    color: #491717;
+    border-radius: 10px;
+  
+}
+
+strong.sales {
+    border-radius: 10px;
+    padding: 10px;
+    background: #FFC447;
+    color: #634C1C;
+    margin-right: 10px;
+}
+
+div.box-balance {
+    display: flex;
+    justify-content: center;
+}

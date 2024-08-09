@@ -1,0 +1,106 @@
+* {
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
+.content {
+    margin-top: 60px;
+}
+
+form.search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+form input.form-control {
+    width: 250px;
+    margin-right: 20px;
+}
+
+button.btn-primary {
+    background: #000000; /* Cor de fundo preta */
+    color: white; /* Cor do texto branco */
+    width: 100px; /* Largura do botão */
+    border: none; /* Sem bordas */
+    padding: 10px; /* Padding interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor do tipo ponteiro */
+    transition: background 0.3s ease; /* Transição suave da cor de fundo */
+    margin-top: 25px; /* Margem superior */
+}
+
+button.btn-primary:hover {
+    background: #555555; /* Cor de fundo ao passar o mouse */
+}
+
+form.search .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+div.box-input {
+    width: 100%;
+    margin-left: 10px;
+}
+
+.table {
+    max-width: 650px;
+}
+
+strong.balance {
+    padding: 10px;
+    background: #3BB5B4;
+    color: #174746;
+    border-radius: 10px;
+}
+
+strong.sales {
+    border-radius: 10px;
+    padding: 10px;
+    background: #FFC447;
+    color: #634C1C;
+    margin-right: 10px;
+}
+
+div.box-balance {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+/* Estilos específicos para o botão Imprimir Relatório */
+button.btn-print {
+    margin-left: 20px; /* Ajusta a margem esquerda para alinhá-lo mais perto do botão Pesquisar */
+    margin-top: 10px; /* Margem superior extra para afastá-lo verticalmente */
+}
+
+@media print {
+    body {
+        width: 210mm;
+        height: 297mm;
+        margin: 10mm;
+        font-size: 24pt; /* Ajuste conforme necessário para legibilidade */
+        color: #000; /* Melhor para impressão em preto e branco */
+    }
+    .content {
+        width: 100%;
+        max-width: 190mm; /* Largura da área de impressão ajustada */
+    }
+    .table {
+        width: 100%;
+        table-layout: fixed; /* Melhora a consistência do layout da tabela */
+    }
+    .table th, .table td {
+        padding: 8px; /* Ajuste para melhor alinhamento vertical */
+        border: 1px solid #ccc; /* Melhora a visibilidade das células */
+    }
+    .btn, .form-control {
+        display: none; /* Oculta todos os botões e campos de formulário para impressão */
+    }
+}

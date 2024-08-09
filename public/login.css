@@ -1,0 +1,48 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; /* Melhora o controle de padding e border */
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Fonte Poppins para todo o corpo da página */
+    background: #f0f4f8; /* Fundo claro para a página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura total da viewport */
+}
+
+.box-content {
+    width: 350px; /* Largura do formulário */
+    background: #0c0c0c; /* Cor de fundo do formulário */
+    padding: 20px;
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
+    color: #FFF; /* Texto branco */
+    text-align: center; /* Centraliza o texto */
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%; /* Largura completa dentro do formulário */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px; /* Bordas arredondadas para os campos de entrada */
+    border: none;
+    outline: none; /* Remove o contorno ao focar */
+}
+
+button {
+    width: 100%; /* Botão ocupa toda a largura do formulário */
+    padding: 10px;
+    background: #0466c8; /* Cor do botão */
+    color: #FFF;
+    border: none;
+    border-radius: 5px; /* Bordas arredondadas para o botão */
+    cursor: pointer; /* Cursor de mão ao passar o mouse */
+    transition: background 0.3s ease; /* Transição suave de cor ao passar o mouse */
+}
+
+button:hover {
+    background: #023e8a; /* Mudança de cor ao passar o mouse */
+}

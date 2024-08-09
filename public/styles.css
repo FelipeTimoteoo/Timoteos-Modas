@@ -1,0 +1,141 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+*
+ {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif !important;
+  background: #fafafa !important;
+}
+
+p {
+  font-family: "Poppins", sans-serif;
+}
+
+a,
+a:hover,
+a:focus {
+  color: inherit !important;
+  text-decoration: none !important;
+  transition: all 0.3s !important;
+}
+
+.wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+.logo-img {
+  display: block; /* Faz com que a imagem se comporte como um elemento de bloco */
+  max-width: 70%; /* Garante que a imagem não ultrapasse o tamanho do contêiner */
+  height: auto; /* Mantém a proporção da imagem */
+  margin-top: 2px; /* Espaçamento acima da imagem */
+  margin-left: auto; /* Centraliza a imagem horizontalmente */
+  margin-right: auto; /* Centraliza a imagem horizontalmente */
+}
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  position: fixed;
+  height: 100vh;
+  background-image: linear-gradient(#000000, #0e4f85);
+  z-index: 999;
+  top: 0;
+  left: 0;
+  color: #fff;
+  transition: all 0.3s;
+  margin-right: 30px;
+}
+
+#sidebar ul p {
+  color: #a6d2f7;
+  padding: 10px;
+}
+
+#sidebar .sidebar-header {
+  padding: 10px;
+  background-image: linear-gradient(#000000, #000000);
+}
+
+#sidebar ul.components {
+  padding: 20px 0;
+  border-bottom: 1px solid #ffffff;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
+#sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+  font-size: 15px;
+  color: #f5f4f4 !important;
+}
+
+#sidebar i {
+  font-size: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#sidebar ul li a:hover {
+  color: #000000 !important;
+  background: #fff;
+}
+
+#nav-button {
+  display: none;
+}
+
+#navbartop {
+  display: none;
+}
+
+nav div.container-fluid {
+  background: #208eeb !important;
+  padding: 10px;
+  color: #a6d2f7;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    margin-left: -250px;
+  }
+  #sidebar.active {
+    margin-left: 0;
+  }
+
+  #nav-button {
+    display: unset;
+  }
+
+  #navbartop {
+    display: unset !important;
+  }
+}
+
+.form-logout {
+  position: absolute;
+  bottom: 0;
+  margin-left: 10px;
+  padding: 10px;
+}
+
+button.btn-exit {
+  font-size: 17px;
+  background: none;
+  color: #a6d2f7;
+}
+
+.content {
+  margin-left: 250px;
+}
+
+
