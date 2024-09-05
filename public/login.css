@@ -1,48 +1,91 @@
 * {
     padding: 0;
     margin: 0;
-    box-sizing: border-box; /* Melhora o controle de padding e border */
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Poppins', sans-serif; /* Fonte Poppins para todo o corpo da página */
-    background: #f0f4f8; /* Fundo claro para a página */
+    font-family: 'Poppins', sans-serif;
+    background: url('https://images8.alphacoders.com/437/thumb-1920-437651.jpg') no-repeat center center fixed;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Altura total da viewport */
+    height: 100vh;
 }
 
 .box-content {
-    width: 350px; /* Largura do formulário */
-    background: #0c0c0c; /* Cor de fundo do formulário */
-    padding: 20px;
-    border-radius: 8px; /* Bordas arredondadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
-    color: #FFF; /* Texto branco */
-    text-align: center; /* Centraliza o texto */
+    width: 350px;
+    background: rgba(255, 255, 255, 0.1); /* Fundo claro semitransparente */
+    padding: 40px;
+    border-radius: 15px; /* Bordas arredondadas */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Borda sutil */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Sombra mais intensa */
+    color: #FFF;
+    text-align: left; /* Alinha o texto à esquerda */
+    position: relative;
 }
 
-input[type="text"], input[type="password"] {
-    width: 100%; /* Largura completa dentro do formulário */
-    padding: 10px;
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Espaçamento entre o logo e o título */
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Faz com que o logo fique redondo */
+    object-fit: cover; /* Garante que a imagem preencha o espaço */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Adiciona uma borda ao redor do logo */
+}
+
+.box-content h1 {
+    color: #fff;
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center; /* Centraliza o título */
+}
+
+input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
     margin: 10px 0;
-    border-radius: 5px; /* Bordas arredondadas para os campos de entrada */
-    border: none;
-    outline: none; /* Remove o contorno ao focar */
+    border-radius: 5px;
+    border: 1px solid rgb(255, 255, 255); /* Borda clara semitransparente */
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.8); /* Fundo mais claro para inputs */
+    color: #fff;
+    font-size: 16px;
 }
 
 button {
-    width: 100%; /* Botão ocupa toda a largura do formulário */
-    padding: 10px;
-    background: #0466c8; /* Cor do botão */
+    width: 100%;
+    padding: 12px;
+    background-color: rgba(255, 0, 0, 0.2); /* Fundo claro semitransparente */
     color: #FFF;
-    border: none;
-    border-radius: 5px; /* Bordas arredondadas para o botão */
-    cursor: pointer; /* Cursor de mão ao passar o mouse */
-    transition: background 0.3s ease; /* Transição suave de cor ao passar o mouse */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Borda sutil */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 20px;
 }
 
 button:hover {
-    background: #023e8a; /* Mudança de cor ao passar o mouse */
+    background-color: rgba(255, 255, 255, 0.3); /* Fundo mais claro no hover */
+}
+
+a.forgot-password, a.create-account {
+    color: rgba(255, 255, 255, 0.7); /* Cor clara e sutil para links */
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    margin-top: 15px;
+    text-align: center; /* Centraliza os links */
+}
+
+a:hover {
+    text-decoration: underline;
+    color: rgba(255, 255, 255, 1); /* Cor mais intensa no hover */
 }

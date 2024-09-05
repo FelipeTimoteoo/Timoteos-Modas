@@ -90,7 +90,9 @@
         <h6>Desconto%<h6>
         <form action="/sales" method="POST">
             <div class="descount">
-                <input class="form-control" type="text" placeholder="" name="descount"/>
+                <!-- Adicionado o ID "desconto" ao campo de desconto -->
+                <input id="desconto" class="form-control" type="text" placeholder="" name="descount"/>
+
             </div>
 
             <div class="col-md-3">
@@ -100,6 +102,32 @@
                         <option value="{{seller._id}}">{{seller.name}}</option>
                     {% endfor %}
                 </select>
+
+ 
+<!-- Adicionado o script para manipular o campo de desconto -->
+<script>
+    // Intercepta o Enter no campo de desconto
+    document.getElementById('desconto').addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Evita a submissão do formulário
+            atualizarValorTotal(); // Chama a função para atualizar o valor total
+        }
+    });
+
+    // Função para atualizar o valor total com o desconto aplicado
+    function atualizarValorTotal() {
+        let desconto = parseFloat(document.getElementById('desconto').value);
+        let totalElement = document.querySelector('.total span'); // Seleciona o elemento onde o total é exibido
+        let total = parseFloat(totalElement.textContent.replace('R$', '').trim()); // Remove o 'R$' e converte para número
+        
+        if (!isNaN(desconto)) {
+            let novoTotal = total - (total * (desconto / 100));
+            totalElement.textContent = 'R$ ' + novoTotal.toFixed(2); // Atualiza o valor total na interface
+        }
+    }
+    
+</script>
+    
             </div>
 
             <div class="finish">
@@ -114,12 +142,3 @@
 
     </div>
 {% endblock %}
-
-<script>
-    function teste() {
-        alert("teste");
-    }
-</script>
-<img src="" alt="Logo de Timoteos Modas" class="logo-img">
-
-

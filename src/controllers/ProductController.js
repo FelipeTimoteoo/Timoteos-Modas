@@ -14,7 +14,6 @@ class ProductController {
   async index(req, res) {
     const filters = {};
     let filterActive = false;
-    let message = "";
 
     if (req.body.nome) {
       let products = await Product.find({
@@ -87,20 +86,24 @@ class ProductController {
 
     products = await Promise.all(getProductsPromise);
 
-    const {sucesso} = req.params;
+    const { sucesso } = req.params;
 
     return res.render("product/list", {
       products: products,
-      sucesso
+      sucesso,
     });
   }
 
   async store(req, res) {
-    const { name, salePrice, amount, expirationDate, barcode } = req.body;
+    let { name, salePrice, amount, expirationDate, barcode } = req.body;
 
     let sucesso = "";
 
-    if (!name || !salePrice || !amount) {
+    // Converter salePrice: substituir vírgula por ponto e converter para número
+    salePrice = salePrice.replace(',', '.');
+    salePrice = parseFloat(salePrice);
+
+    if (!name || isNaN(salePrice) || !amount) {
       let products = await Product.find();
 
       const getProductsPromise = products.map(async (product) => {
@@ -121,13 +124,14 @@ class ProductController {
         barcode,
         products: products,
         expirationDate: moment(expirationDate).format("YYYY-MM-DD"),
-        message: "Preencha os campos obrigatórios (*) para continuar!",
+        message: "Preencha os campos obrigatórios (*) corretamente para continuar!",
       });
     }
 
     try {
       await Product.create({
         ...req.body,
+        salePrice, // Já convertido para número
         expirationDate: !req.body.expirationDate
           ? null
           : moment(req.body.expirationDate).format(),
@@ -153,16 +157,9 @@ class ProductController {
         barcode,
         products: products,
         expirationDate: moment(expirationDate).format("YYYY-MM-DD"),
-        message: "Erro ao casdastrar produto. Verifique se no cadastro de preço você colocou vírgula no lugar de ponto.",
+        message: "Erro ao cadastrar produto. Verifique se no cadastro de preço você colocou vírgula no lugar de ponto.",
       });
     }
-
-    // await Product.create({
-    //   ...req.body,
-    //   expirationDate: !req.body.expirationDate
-    //     ? null
-    //     : moment(req.body.expirationDate).format(),
-    // });
 
     sucesso = "Produto cadastrado com sucesso!";
 
@@ -185,9 +182,13 @@ class ProductController {
 
   async update(req, res) {
     const { id } = req.params;
-    const { name, salePrice, amount } = req.body;
+    let { name, salePrice, amount } = req.body;
 
-    if (!name || !salePrice || !amount) {
+    // Converter salePrice: substituir vírgula por ponto e converter para número
+    salePrice = salePrice.replace(',', '.');
+    salePrice = parseFloat(salePrice);
+
+    if (!name || isNaN(salePrice) || !amount) {
       let product = await Product.findById(id);
 
       product.formattedExpirationDate = moment(product.expirationDate).format(
@@ -196,7 +197,7 @@ class ProductController {
 
       return res.render("product/update", {
         product: product,
-        message: "Preencha os campos obrigatórios (*) para continuar!",
+        message: "Preencha os campos obrigatórios (*) corretamente para continuar!",
       });
     }
 
@@ -204,6 +205,7 @@ class ProductController {
       id,
       {
         ...req.body,
+        salePrice, // Já convertido para número
         expirationDate: !req.body.expirationDate
           ? null
           : moment(req.body.expirationDate).format(),

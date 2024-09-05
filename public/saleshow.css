@@ -1,5 +1,6 @@
 @import 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700';
 
+/* Estilos gerais */
 * {
   padding: 0;
   border: 0;
@@ -17,41 +18,26 @@ p {
 }
 
 .content {
-  /* width: 100px; */
   height: 200px !important;
-  /* margin-top: -20px; */
   margin-bottom: 20px;
 }
 
-form.search {
-  margin-bottom: 20px;
-}
-
-strong {
-  font-size: 15px;
-  font-weight: bold;
-  text-align: center;
-}
-
+/* Caixa de venda */
 .box-sale {
   border-radius: 10px;
   background: #eaeef1;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 15px;
-  padding-top: 15px;
-  margin-top: 30px;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-bottom: 10px;
+  padding: 15px;
+  margin: 30px 5px 10px 5px;
 }
 
+/* Para produtos variados */
 .productsVaried {
   display: flex;
-  justify-content: column;
+  flex-direction: column;
   text-decoration: underline;
 }
 
+/* Dados do produto */
 div.data-product {
   display: flex;
   flex-direction: column;
@@ -61,23 +47,18 @@ div.data-product {
   margin-top: 15px;
 }
 
+/* Header para o recibo */
 .header {
   display: flex;
   justify-content: space-between;
 }
 
-.total strong {
+/* Estilos de total e saldo */
+.total strong, strong.balance {
   background: #3bb5b4;
   color: #174746;
   padding: 5px;
   border-radius: 5px;
-}
-
-strong.balance {
-  padding: 10px;
-  background: #3bb5b4;
-  color: #174746;
-  border-radius: 10px;
 }
 
 strong.sales {
@@ -93,14 +74,58 @@ a {
 }
 
 div.box-balance {
-  margin-bottom: 30px;
-  margin-top: 15px;
+  margin: 15px 0 30px 0;
 }
 
+/* Botão de exclusão */
 button.button-delete {
   margin-top: 10px;
 }
 
 .box-descount {
   margin-top: 5px;
+}
+
+/* Estilo de impressão */
+@media print {
+  /* Remover cabeçalhos e rodapés automáticos */
+  @page {
+    margin: 0;  /* Remove a margem padrão da impressão */
+  }
+
+  /* Define margens personalizadas no corpo */
+  body {
+    margin: 1cm;
+  }
+
+  /* Esconder qualquer barra de navegação ou botões que não precisam ser impressos */
+  .no-print, nav, .header, footer {
+    display: none !important;
+  }
+
+  /* Ajustes específicos para garantir boa impressão */
+  .content {
+    margin-bottom: 0;
+  }
+
+  /* Remover fundo para impressão */
+  body {
+    background: white !important;
+  }
+
+  /* Melhor espaçamento para tabelas */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table th, table td {
+    padding: 5px;
+    text-align: left;
+  }
+
+  /* Definir fonte menor para impressão */
+  * {
+    font-size: 10px;
+  }
 }

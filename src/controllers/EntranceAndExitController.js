@@ -6,11 +6,11 @@ const formatCurrency = require("../lib/formatCurrency");
 class EntranceAndExitController {
   async index(req, res) {
     // Remove a verificação de permissão de administrador
-    // const userLogged = req.session.userId;
+     const userLogged = req.session.userId;
     
-    // if(userLogged.type !== "ADMIN") {
-    //   return res.render("notPermission/index");
-    // }
+     if(userLogged.type !== "ADMIN") {
+       return res.render("notPermission/index");
+     }
     
     let items = {
       entrances: [],

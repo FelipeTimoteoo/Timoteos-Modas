@@ -1,36 +1,33 @@
-<html>
-
-    <head>
-        
-        <title>Login</title>
-        <link rel="stylesheet" href="/login.css"/>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">  
-        
-    </head>
-    <body>
-        <div class="content">
-            <div class="box-content">
-            <p>{{error}}</p>
-                <form action='/session' method="post">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">E-mail</label>
-                        <input type="email" name="email" value="{{ user.email }}" class="form-control" id="email" placeholder="name@example.com">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Senha</label>
-                        <input type="password" name="password" value="{{ user.password }}" class="form-control" id="password" placeholder="*********">
-                    </div>
-
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Logar</button>
-                    </div>
-                </form>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/login.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body>
+    <div class="login-container">
+        <div class="box-content">
+            <!-- Adicionando o logo redondo acima do título -->
+            <div class="logo-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBe1uA1lyJXYMjfNW_ifDGOsnCxjrlANcTFuZZFdj9Q9X3ruIE" alt="Logo Timoteo's Modas" class="logo">
             </div>
+            <h1>Faça seu login<span class="dot">.</span></h1>
+            <p>{{error}}</p>
+            <form action='/session' method="post" class="login-form">
+                <div class="input-group mb-3">
+                    <input type="email" name="email" value="{{ user.email }}" class="form-control" id="email" placeholder="Email">
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="password" name="password" value="{{ user.password }}" class="form-control" id="password" placeholder="Senha">
+                </div>
+
+                <button type="submit" class="login-button btn btn-primary">Entrar</button>
+            </form>
         </div>
-    </body>
+    </div>
+</body>
 </html>
-        
-
-

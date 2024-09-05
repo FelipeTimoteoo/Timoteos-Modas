@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-left: 220px; /* Ajusta a margem à esquerda para mover o painel para a direita */
+}
+
+.dashboard-header {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #333;
+    color: #fff;
+}
+
+.dashboard-section {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(47, 0, 255, 0.1);
+}
+
+.dashboard-section h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.dashboard-section p, .dashboard-section ul {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.dashboard-section ul {
+    padding-left: 20px;
+}
+
+.dashboard-section canvas {
+    margin-top: 20px;
+    max-width: 50%; /* Para garantir que o gráfico não ultrapasse a largura */
+    max-height: 400px; /* Altura máxima do gráfico */
+}
+
+.dashboard ul li {
+    list-style-type: none;
+    background-color: #e7e7e7;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.dashboard ul li:nth-child(odd) {
+    background-color: #d0d0d0;
+}
+
+.dashboard ul li:nth-child(even) {
+    background-color: #e7e7e7;
+}

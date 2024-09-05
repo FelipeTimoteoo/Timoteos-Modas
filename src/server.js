@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const nunjucks = require("nunjucks");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
-const session = require("./config/session");
+const session = require("express-session");
 const cors = require("cors");
 const path = require("path");
 
@@ -15,23 +15,38 @@ app.use(cors());
 app.use(express.static("public"));
 
 mongoose.connect(process.env.DB_URL, {
-  useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-app.use(session);
+// Configurando a sessão
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'defaultSecret',
+  resave: false,
+  saveUninitialized: false,  // Evita o aviso do express-session
+  cookie: { secure: process.env.NODE_ENV === 'production' }
+}));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
 
-nunjucks.configure(path.resolve(__dirname, "views"), {
+// Configurando o ambiente Nunjucks
+const env = nunjucks.configure(path.resolve(__dirname, "views"), {
   watch: true,
   express: app,
   autoescape: true,
 });
 
+// Adicionando o filtro 'currency'
+env.addFilter('currency', function(value) {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(value);
+});
+
 app.set("view engine", "njk");
 app.use(require("./routes"));
 
-app.listen(process.env.PORT || 3002);
+app.listen(process.env.PORT || 3001);

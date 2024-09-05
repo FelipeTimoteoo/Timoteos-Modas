@@ -94,7 +94,7 @@ class SellerCommissionController {
       nameSeller = seller.name;
     }
 
-    const commission = (total / 100) * 4;
+    const commission = (total / 100) * 1;
 
     return res.render('seller/commission', {
       sales,

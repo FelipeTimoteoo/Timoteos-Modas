@@ -259,10 +259,10 @@ select {
 }
 /* Estilo para manipular o tamanho da imagem */
 .logo-imgg {
-  width: 500px; /* ajuste este valor para aumentar ou diminuir */
+  width: 400px; /* ajuste este valor para aumentar ou diminuir */
   height: auto; /* mantém a proporção da imagem */
   position: absolute; /* 'absolute' para posicionar relativamente ao container mais próximo com posição não estática */
-  top: 550px; /* diminuído para mover a imagem um pouco para cima */
+  top: 600px; /* diminuído para mover a imagem um pouco para cima */
   right: 200px; /* diminuído para mover a imagem um pouco para a direita */
 }
 

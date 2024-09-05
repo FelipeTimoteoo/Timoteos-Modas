@@ -1,0 +1,120 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+    <title>Dashboard Analítico</title>
+    <link rel="stylesheet" href="/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+    <header class="dashboard-header">
+        <h1>Dashboard Analítico</h1>
+    </header>
+
+    <section class="dashboard-section">
+        <h2>Total de Vendas</h2>
+        <p>Quantidade de Vendas: {{ totalSales.totalCount }}</p>
+        <p>Valor Total: {{ totalSales.totalAmount }}</p>
+    </section>
+
+    <section class="dashboard-section">
+        <h2>Melhores Vendedores</h2>
+        <ul>
+            {% for seller in formattedTopSellers %}
+                <li>Vendedor: {{ seller.name }} - Receita Total: {{ seller.totalRevenue }}</li>
+            {% endfor %}
+        </ul>
+        <canvas id="topSellersChart"></canvas>
+    </section>
+</div>
+
+<script>
+    // Dados dos Melhores Vendedores (usando `rawTopSellers`)
+    const topSellersLabels = [
+        {% for seller in rawTopSellers %}
+            '{{ seller.name }}',
+        {% endfor %}
+    ];
+    const topSellersData = [
+        {% for seller in rawTopSellers %}
+            {{ seller.totalRevenue }},
+        {% endfor %}
+    ];
+
+    const topSellersChartCtx = document.getElementById('topSellersChart').getContext('2d');
+    
+    const gradient = topSellersChartCtx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(75, 192, 350, 0.5)');
+    gradient.addColorStop(1, 'rgba(75, 192, 192, 0.1)');
+
+    const topSellersChart = new Chart(topSellersChartCtx, {
+        type: 'bar',
+        data: {
+            labels: topSellersLabels,
+            datasets: [{
+                label: 'Receita Total (R$)',
+                data: topSellersData,
+                backgroundColor: gradient,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                borderRadius: 10, // Bordas arredondadas
+                hoverBackgroundColor: 'rgba(75, 192, 192, 0.8)',
+                hoverBorderColor: 'rgba(75, 192, 192, 1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#333',
+                        font: {
+                            size: 12
+                        }
+                    },
+                    grid: {
+                        color: 'rgba(200, 200, 200, 0.2)'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#333',
+                        font: {
+                            size: 12
+                        }
+                    },
+                    grid: {
+                        display: false
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                            size: 14
+                        },
+                        color: '#333'
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                    titleFont: {
+                        size: 16
+                    },
+                    bodyFont: {
+                        size: 14
+                    },
+                    bodyColor: '#fff',
+                    titleColor: '#fff'
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

@@ -2,6 +2,58 @@
 {% block head %}
     <title>Produtos</title>
     <link rel="stylesheet" href="/product.css"/>
+    <style>
+        /* Estilos para garantir que a tabela ocupe toda a largura */
+        table {
+            width: 100%;
+            table-layout: auto;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 8px;
+            text-align: left;
+            word-wrap: break-word; /* Faz as palavras quebrarem para caberem na célula */
+            border: 1px solid #ddd;
+        }
+
+        /* Especificações para impressão */
+        @media print {
+            body, html {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            .content {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            table {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                border: none;
+            }
+
+            table th, table td {
+                font-size: 12px; /* Ajusta o tamanho da fonte */
+                padding: 4px; /* Reduz o padding para melhor ajuste */
+            }
+
+            .btn, .alert, .search { 
+                display: none; /* Esconde botões e elementos não necessários na impressão */
+            }
+
+            /* Remove bordas da página */
+            @page {
+                margin: 0;
+            }
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -58,11 +110,12 @@
             {% if filterActive === true %}
                 <a href="/productslist" class="btn btn-secondary">Limpar</a>
             {% endif %}
+            <button type="button" class="btn btn-info" onclick="window.print();">Imprimir Lista</button>
         </form>
         
         <table class="table table-striped table-hover">
             <tr>
-                <th>Código do Porduto</th>
+                <th>Código do Produto</th>
                 <th>Nome</th>
                 <th>Preço de Venda</th>
                 <th>Quantidade</th>
@@ -79,7 +132,7 @@
                     <td>
                         <div class="action">
                             <a href="/products/edit/{{product._id}}"><i class="bi bi-pencil-fill"></i></a>       
-                            <form  name="myform" action="/products/delete/{{product._id}}?_method=DELETE" method="post" onSubmit="deleteProdutct(event)">
+                            <form  name="myform" action="/products/delete/{{product._id}}?_method=DELETE" method="post" onSubmit="deleteProduct(event)">
                                 <button type="submit" class="delete"><i class="bi bi-trash-fill"></i></button>
                             </form>
                         </div>
@@ -91,8 +144,8 @@
     </div>
 <script>
     window.addEventListener('keydown',function(e){if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'||e.keyCode==13){if(e.target.nodeName=='INPUT'&&e.target.type=='text'&&e.target.name=='barcode'){e.preventDefault();return false;}}},true);
-    function deleteProdutct(e) {
-        if(!window.confirm("Deseja realmente deletar o protudo ?")) {
+    function deleteProduct(e) {
+        if(!window.confirm("Deseja realmente deletar o produto ?")) {
             e.returnValue = false; 
         }
     }

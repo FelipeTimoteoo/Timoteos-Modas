@@ -12,6 +12,7 @@ const EntranceAndExitController = require('./controllers/EntranceAndExitControll
 const SessionController = require('./controllers/SessionController');
 const SellerController = require('./controllers/SellerController');
 const SellerCommissionController = require('./controllers/SellerCommissionController');
+const DashboardController = require('./controllers/DashboardController'); // Novo controlador
 
 const middleware = require('./middlewares/session');
 
@@ -33,6 +34,9 @@ routes.get('/notpermission', (req, res) => {
   return res.render('notPermission/index');
 });
 
+// Adicionando a rota para o dashboard
+routes.get('/dashboard', DashboardController.index); // Nova rota para o dashboard
+
 routes.get('/userslist', UserController.index);
 routes.get('/users', UserController.create);
 routes.post('/users', UserController.store);
@@ -47,14 +51,8 @@ routes.get('/sellerslist/:sucesso', SellerController.index);
 routes.get('/sellers/edit/:id', SellerController.edit);
 routes.put('/sellers/edit/:id', SellerController.update);
 
-routes.get(
-  '/sellerscommissions/:id',
-  SellerCommissionController.index
-);
-routes.post(
-  '/sellerscommissionsdate/:id',
-  SellerCommissionController.index
-);
+routes.get('/sellerscommissions/:id', SellerCommissionController.index);
+routes.post('/sellerscommissionsdate/:id', SellerCommissionController.index);
 
 routes.get('/categoryslist', CategoryController.index);
 routes.get('/categorys', CategoryController.create);
@@ -98,14 +96,8 @@ routes.delete('/exits/delete/:id', ExitController.destroy);
 routes.get('/entrances', EntranceController.index);
 routes.post('/entrancesdate', EntranceController.index);
 
-routes.get(
-  '/entrancesandexitsdatails',
-  EntranceAndExitController.index
-);
-routes.post(
-  '/entrancesandexitsdatailsdates',
-  EntranceAndExitController.index
-);
+routes.get('/entrancesandexitsdatails', EntranceAndExitController.index);
+routes.post('/entrancesandexitsdatailsdates', EntranceAndExitController.index);
 routes.get('/entrancesandexits', (req, res) => {
   return res.render('entranceandexit/list');
 });
