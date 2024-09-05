@@ -49,4 +49,11 @@ env.addFilter('currency', function(value) {
 app.set("view engine", "njk");
 app.use(require("./routes"));
 
-app.listen(process.env.PORT || 3001);
+// Rota principal para verificar se a aplicação está funcionando
+app.get("/", (req, res) => {
+  res.send("Aplicação funcionando corretamente!");
+});
+
+app.listen(process.env.PORT || 3001, () => {
+  console.log(`Servidor rodando na porta ${process.env.PORT || 3001}`);
+});
