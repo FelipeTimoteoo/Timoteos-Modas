@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.js",
-    "start": "node src/server.js",
-    "build": "pkg . --targets node14-linux-x64,node14-win-x64,node14-macos-x64 --output dist/meu-app"
+    "start": "node src/server.js"
   },
   "keywords": [],
   "author": "",
