@@ -2,8 +2,7 @@
   "name": "systemcad",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "bin": "src/server.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.js",
