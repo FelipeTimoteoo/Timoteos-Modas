@@ -34,6 +34,8 @@ routes.get('/notpermission', (req, res) => {
   return res.render('notPermission/index');
 });
 
+//teste
+
 // Adicionando a rota para o dashboard
 routes.get('/dashboard', DashboardController.index); // Nova rota para o dashboard
 
