@@ -14,10 +14,10 @@ app.use(cors());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.DB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// Atualizando a conexão com o MongoDB, removendo as opções depreciação
+mongoose.connect(process.env.DB_URL)
+  .then(() => console.log('Conectado ao MongoDB'))
+  .catch(err => console.error('Erro ao conectar ao MongoDB', err));
 
 // Configurando a sessão
 app.use(session({
@@ -54,6 +54,7 @@ app.get("/", (req, res) => {
   res.send("Aplicação funcionando corretamente!");
 });
 
+// Iniciando o servidor
 app.listen(process.env.PORT || 3001, () => {
   console.log(`Servidor rodando na porta ${process.env.PORT || 3001}`);
 });
