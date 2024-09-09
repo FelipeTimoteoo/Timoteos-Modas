@@ -1,0 +1,63 @@
+{% extends 'layout.njk' %}
+
+{% block head %}
+  <!-- Incluindo o CSS específico da página de Contas a Pagar -->
+  <link rel="stylesheet" href="/payables.css">
+{% endblock %}
+
+{% block content %}
+<div class="container-payables">
+  <h1>Contas a Pagar</h1>
+
+  <!-- Formulário para adicionar nova conta -->
+  <form action="/payables" method="POST" class="form-payables">
+    <label for="descricao">Descrição:</label>
+    <input type="text" name="descricao" id="descricao" required>
+
+    <label for="valor">Valor:</label>
+    <input type="number" step="0.01" name="valor" id="valor" required>
+
+    <label for="data_vencimento">Data de Vencimento:</label>
+    <input type="date" name="data_vencimento" id="data_vencimento" required>
+
+    <button type="submit">Adicionar Conta</button>
+  </form>
+
+  <!-- Tabela para listar as contas a pagar -->
+  <h2>Lista de Contas</h2>
+  <table class="table-payables">
+    <thead>
+      <tr>
+        <th>Descrição</th>
+        <th>Valor</th>
+        <th>Data de Vencimento</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for conta in payables %}
+        <tr>
+          <td>{{ conta.descricao }}</td>
+          <td>{{ conta.valor | currency }}</td>
+          <td>{{ conta.data_vencimento }}</td>
+          <td>{{ conta.status }}</td>
+          <td>
+            <!-- Botão para dar baixa, se pendente -->
+            {% if conta.status == 'Pendente' %}
+              <form action="/payables/pay/{{ conta._id }}" method="POST" style="display:inline;">
+                <button type="submit">Dar Baixa</button>
+              </form>
+            {% endif %}
+
+            <!-- Botão para excluir a conta -->
+            <form action="/payables/delete/{{ conta._id }}" method="POST" style="display:inline;">
+              <button type="submit" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir esta conta?');">Excluir</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

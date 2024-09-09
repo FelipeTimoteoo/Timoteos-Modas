@@ -8,26 +8,16 @@ const formatCurrency = require('../lib/formatCurrency');
 class SaleController {
   async index(req, res) {
     const userLogged = req.session.userId;
-
     const filters = {};
-
     let total = 0;
-
     const { startDate, finalDate } = req.body;
 
     if (startDate || finalDate) {
       filters.createdAt = {};
-
-      const startDate = moment(req.body.startDate).format(
-        'YYYY-MM-DDT00:mm:ss.SSSZ'
-      );
-
-      const finalDate = moment(req.body.finalDate).format(
-        'YYYY-MM-DDT23:59:ss.SSSZ'
-      );
-
-      filters.createdAt.$gte = startDate;
-      filters.createdAt.$lte = finalDate;
+      const formattedStartDate = moment(req.body.startDate).format('YYYY-MM-DDT00:mm:ss.SSSZ');
+      const formattedFinalDate = moment(req.body.finalDate).format('YYYY-MM-DDT23:59:59.SSSZ');
+      filters.createdAt.$gte = formattedStartDate;
+      filters.createdAt.$lte = formattedFinalDate;
     }
 
     let sales = await Sale.paginate(filters, {
@@ -38,19 +28,14 @@ class SaleController {
     });
 
     const getSalesPromise = sales.docs.map(async (sale) => {
-      sale.formattedDate = moment(sale.createdAt).format(
-        'DD-MM-YYYY'
-      );
+      sale.formattedDate = moment(sale.createdAt).format('DD-MM-YYYY');
       sale.sale.products.map((product) => {
         product.formattedPrice = formatCurrency.brl(product.price);
       });
-
       sale.sale.formattedTotal = formatCurrency.brl(sale.sale.total);
-
       if (!sale.sale.descount) {
         sale.sale.descount = 0;
       }
-
       return sale;
     });
 
@@ -62,30 +47,20 @@ class SaleController {
       sales.map((sale) => {
         total += sale.sale.total;
       });
-
       dateFilter = true;
     }
 
     if (!startDate || !finalDate) {
-      sales = sales.map((sale) => {
-        if (
-          moment(sale.createdAt).month() ===
-          moment(Date.now()).month()
-        ) {
+      sales = sales.filter((sale) => {
+        if (moment(sale.createdAt).month() === moment(Date.now()).month()) {
           total += sale.sale.total;
           return sale;
         }
       });
     }
 
-    let salesFilter = [];
-
-    sales.map((sale) => {
-      if (sale != undefined) salesFilter.push(sale);
-    });
-
     return res.render('sale/list', {
-      sales: salesFilter,
+      sales: sales.filter((sale) => sale !== undefined),
       total: formatCurrency.brl(total),
       dateFilter: dateFilter,
       startDate,
@@ -125,9 +100,8 @@ class SaleController {
     await Promise.all(
       cart.items.map(async (item) => {
         const product = await Product.findById(item.product._id);
-
         if (product) {
-          product.amount = product.amount - item.quantity;
+          product.amount -= item.quantity;
           await product.save();
         }
       })
@@ -139,28 +113,26 @@ class SaleController {
     });
 
     // Atualizar o carrinho
-    cart.items.map(async (item) => {
-      cart = Cart.init(cart).delete({
-        id: item.product._id,
-      });
-      req.session.cart = cart;
-    });
+    await Promise.all(
+      cart.items.map(async (item) => {
+        cart = Cart.init(cart).delete({ id: item.product._id });
+        req.session.cart = cart;
+      })
+    );
 
     return res.redirect('/cart');
   }
 
   async destroy(req, res) {
     const { id } = req.params;
-
     const sale = await Sale.findById(id);
 
     if (sale) {
       await Promise.all(
         sale.sale.products.map(async (item) => {
           const product = await Product.findById(item.product);
-
           if (product) {
-            product.amount = product.amount + item.quantity;
+            product.amount += item.quantity;
             await product.save();
           }
         })
@@ -169,9 +141,8 @@ class SaleController {
       await Sale.findByIdAndDelete(id);
 
       const entrance = await Entrance.find({ sale: sale._id });
-
       if (entrance.length > 0) {
-        await Entrance.findByIdAndRemove(entrance[0]._id);
+        await Entrance.findByIdAndDelete(entrance[0]._id);
       }
     }
 
@@ -202,12 +173,12 @@ class SaleController {
 
     if (cart.items.length <= 0) return res.redirect('/cart');
 
-    cart.items.map(async (item) => {
-      cart = Cart.init(cart).delete({
-        id: item.product._id,
-      });
-      req.session.cart = cart;
-    });
+    await Promise.all(
+      cart.items.map(async (item) => {
+        cart = Cart.init(cart).delete({ id: item.product._id });
+        req.session.cart = cart;
+      })
+    );
 
     return res.redirect('/cart');
   }

@@ -13,6 +13,7 @@ const SessionController = require('./controllers/SessionController');
 const SellerController = require('./controllers/SellerController');
 const SellerCommissionController = require('./controllers/SellerCommissionController');
 const DashboardController = require('./controllers/DashboardController'); // Novo controlador
+const PayableController = require('./controllers/PayableController'); // Novo controlador para Contas a Pagar
 
 const middleware = require('./middlewares/session');
 
@@ -33,8 +34,6 @@ routes.get('/', (req, res) => {
 routes.get('/notpermission', (req, res) => {
   return res.render('notPermission/index');
 });
-
-//teste
 
 // Adicionando a rota para o dashboard
 routes.get('/dashboard', DashboardController.index); // Nova rota para o dashboard
@@ -103,5 +102,11 @@ routes.post('/entrancesandexitsdatailsdates', EntranceAndExitController.index);
 routes.get('/entrancesandexits', (req, res) => {
   return res.render('entranceandexit/list');
 });
+
+// Novas rotas para Contas a Pagar
+routes.get('/payables', PayableController.listAllPayables); // Listar todas as contas a pagar
+routes.post('/payables', PayableController.createPayable); // Criar uma nova conta a pagar
+routes.post('/payables/pay/:id', PayableController.payPayable); // Dar baixa em uma conta e marcar como paga
+routes.post('/payables/delete/:id', PayableController.deletePayable); // Excluir conta a pagar e saída se estiver paga
 
 module.exports = routes;

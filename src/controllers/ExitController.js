@@ -5,12 +5,12 @@ const formatCurrency = require("../lib/formatCurrency");
 class ExitController {
   async index(req, res) {
     // Remove a verificação de permissão de administrador
-     const userLogged = req.session.userId;
-    
-     if(userLogged.type !== "ADMIN") {
-       return res.render("notPermission/index");
-     }
-    
+    const userLogged = req.session.userId;
+
+    if (userLogged.type !== "ADMIN") {
+      return res.render("notPermission/index");
+    }
+
     const filters = {};
 
     let total = 0;
@@ -168,7 +168,8 @@ class ExitController {
   async destroy(req, res) {
     const { id } = req.params;
 
-    await Exit.findByIdAndRemove(id);
+    // Substituir findByIdAndRemove por findByIdAndDelete
+    await Exit.findByIdAndDelete(id);
 
     return res.redirect("/exits");
   }

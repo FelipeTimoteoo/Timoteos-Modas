@@ -219,7 +219,7 @@ class ProductController {
   async destroy(req, res) {
     const { id } = req.params;
 
-    await Product.findByIdAndRemove(id);
+    await Product.findByIdAndDelete(id); // Usar findByIdAndDelete em vez de findByIdAndRemove
 
     return res.redirect("/productslist");
   }
